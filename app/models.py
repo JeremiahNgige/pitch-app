@@ -72,7 +72,9 @@ class Comment(db.Model):
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id'), nullable=False)
     comment = db.Column(db.Text())
 
-
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
 
     @classmethod
     def get_comments(cls, post_id):

@@ -34,8 +34,7 @@ def new_post():
         category = form.category.data
         user_id = current_user._get_current_object().id
         post_obj = Post(post=post, title=title, category=category, user_id=user_id)
-        db.session.add(post_obj)
-        db.session.commit()
+        post_obj.save()
         return redirect(url_for('main.index'))
     
     return render_template('pitch.html', form=form)
