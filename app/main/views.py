@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for
+from flask import render_template, redirect, url_for,abort
 from flask_login import login_required, current_user
 
 from . import main
@@ -62,23 +62,23 @@ def comment(post_id):
     return render_template('comment.html', form=form, post=post, comments=comments, user=user)
 
 
-@main.route('/user')
+@main.route('/user/<uname>')
 @login_required
-def user():
+def profile(uname):
     username = current_user.username
-    user = User.query.filter_by(username=username).first()
+    user = User.query.filter_by(username=uname).first()
     if user is None:
-        return ('not found')
-    return render_template('profile.html', user=user)
+        abort(404)
+    return render_template('profile/profile.html', user=user)
 
 
-@main.route('/user/<name>/update_profile', methods=['POST', 'GET'])
+@main.route('/user/<uname>/update_profile', methods=['POST', 'GET'])
 @login_required
-def updateprofile(name):
+def update_profile(uname):
     form = UpdateProfile()
-    user = User.query.filter_by(username=name).first()
+    user = User.query.filter_by(username=uname).first()
     if user is None:
-        error = 'The user does not exist'
+        abort(404)
     if form.validate_on_submit():
         user.bio = form.bio.data
         user.save()
@@ -102,3 +102,14 @@ def downvote(id):
     vm = Downvote(post=post, downvote=1)
     vm.save()
     return redirect(url_for('main.posts'))
+
+@main.route('/user/<uname>/update/pic',methods= ['POST'])
+@login_required
+def update_pic(uname):
+    user = User.query.filter_by(username = uname).first()
+    if 'photo' in request.files:
+        filename = photos.save(request.files['photo'])
+        path = f'photos/{filename}'
+        user.profile_pic_path = path
+        db.session.commit()
+    return redirect(url_for('main.profile',uname=uname))

@@ -15,6 +15,14 @@ class User(UserMixin, db.Model):
     profile_pic_path = db.Column(db.String())
     
     
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+    
     @property
     def password(self):
         raise AttributeError('You cannot read the password attribute')
