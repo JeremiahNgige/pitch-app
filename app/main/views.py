@@ -21,7 +21,7 @@ def posts():
     posts = Post.query.all()
     likes = Upvote.query.all()
     user = current_user
-    return render_template('pitch_display.html', posts=posts, likes=likes, user=user)
+    return render_template('pitch_disp.html', posts=posts, likes=likes, user=user)
 
 
 @main.route('/new_post', methods=['GET', 'POST'])
@@ -34,8 +34,10 @@ def new_post():
         category = form.category.data
         user_id = current_user._get_current_object().id
         post_obj = Post(post=post, title=title, category=category, user_id=user_id)
-        post_obj.save()
+        db.session.add(post_obj)
+        db.session.commit()
         return redirect(url_for('main.index'))
+    
     return render_template('pitch.html', form=form)
 
 
@@ -62,27 +64,27 @@ def comment(post_id):
     return render_template('comment.html', form=form, post=post, comments=comments, user=user)
 
 
-@main.route('/user/<uname>')
+@main.route('/user')
 @login_required
-def profile(uname):
+def user():
     username = current_user.username
-    user = User.query.filter_by(username=uname).first()
+    user = User.query.filter_by(username=username).first()
     if user is None:
         abort(404)
     return render_template('profile/profile.html', user=user)
 
 
-@main.route('/user/<uname>/update_profile', methods=['POST', 'GET'])
+@main.route('/user/<name>/update_profile', methods=['POST', 'GET'])
 @login_required
 def update_profile(uname):
     form = UpdateProfile()
-    user = User.query.filter_by(username=uname).first()
+    user = User.query.filter_by(username=name).first()
     if user is None:
         abort(404)
     if form.validate_on_submit():
         user.bio = form.bio.data
         user.save()
-        return redirect(url_for('.profile', name=name))
+        return redirect(url_for('.profile', uname=user.username))
     return render_template('profile/update_profile.html', form=form)
 
 
@@ -103,13 +105,13 @@ def downvote(id):
     vm.save()
     return redirect(url_for('main.posts'))
 
-@main.route('/user/<uname>/update/pic',methods= ['POST'])
+@main.route('/user/<name>/update/pic',methods= ['POST'])
 @login_required
-def update_pic(uname):
-    user = User.query.filter_by(username = uname).first()
+def update_pic(name):
+    user = User.query.filter_by(username = name).first()
     if 'photo' in request.files:
         filename = photos.save(request.files['photo'])
         path = f'photos/{filename}'
         user.profile_pic_path = path
         db.session.commit()
-    return redirect(url_for('main.profile',uname=uname))
+    return redirect(url_for('main.profile',name=uname))

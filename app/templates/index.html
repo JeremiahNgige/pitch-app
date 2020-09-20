@@ -1,16 +1,16 @@
 {% extends 'base.html'%}
 {% from 'pitch_disp_macros.html' import display_pitches%}
 {% block content%}
-<div class="bgimage">
-    <div class="p-3 p-md-5 m-md-3 text-center bg-transparent">
-        <div class="col-md-12 p-lg-5 mx-auto my-5">
-            <h1 class="display-4 font-weight-normal text-white">1 Minute Pitch:</h1>
-            <p class="lead font-weight-normal text-white">Make it happen in a minute.</p>
-            <div id="mx-auto">
-                <a class="btn btn-outline-secondary text-white" href="/new_post">New Pitch</a>
-                <a class="btn btn-outline-secondary text-white" href="/posts">View Pitches</a>
+<section class=" bg-landing bg-primary outer">
+    <div class="p-5  text-center bg-transparent container">
+        <div class="p-5">
+            <h1 class="display-4 font-weight-normal text-white">Pitch it</h1>
+            <p class="lead font-weight-normal text-white">get recognised by other pitchers:</p>
+            <div class= 'p-5'>
+                <a class="btn btn-outline-light btn-sm  mt-2" href="/new_post"> Create Pitch</a>
+                <a class="btn btn-outline-light btn-sm  mt-2" href="/posts">View Pitches</a>
             </div>
         </div>
     </div>
-</div>
+</section>
 {% endblock %}

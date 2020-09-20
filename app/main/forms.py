@@ -16,7 +16,7 @@ class PostForm(FlaskForm):
     post = TextAreaField('Pitch', validators=[Required()])
     category = SelectField('Category', choices=[('product', 'product'), ('idea', 'idea'), ('business', 'business')],
                            validators=[Required()])
-    submit = SubmitField('Post')
+    submit = SubmitField('Post Pitch')
 
 
 class CommentForm(FlaskForm):

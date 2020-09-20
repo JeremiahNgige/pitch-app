@@ -1,0 +1,12 @@
+.bg-landing{
+    width: auto;
+    height: 100%;
+   
+}
+.outer{
+    min-width: 100%;
+    height: 100%;
+    background-color:transparent;
+    display: grid;
+    place-items: center;
+}
