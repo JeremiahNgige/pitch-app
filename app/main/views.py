@@ -36,7 +36,7 @@ def new_post():
         user_id = current_user._get_current_object().id
         post_obj = Post(post=post, title=title, category=category, user_id=user_id)
         post_obj.save()
-        return redirect(url_for('main.index'))
+        return redirect(url_for('main.posts'))
     
     return render_template('pitch.html', form=form)
 
