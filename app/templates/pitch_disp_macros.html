@@ -4,10 +4,10 @@
     <div>
         <br><br>
     </div>
-    <div class="jumbotron">
-        <div class="overlay">
-            <h1 class="">Pitches</h1>
-            <a href="/new_post"><button class="btn">New Pitch</button></a>
+    <div class="jumbotron bg-primary shadow-lg mt-3">
+        <div class="overlay text-center">
+            <h1 class="text-center text-bold text-white">Pitches</h1>
+            <a href="/new_post"><button class="btn btn-outline-light btn-sm text-center">Create Pitch</button></a>
         </div>
     </div>
     <div class="card-columns">
@@ -23,13 +23,13 @@
             </div>
             <div class="card-footer row ">
                 <div class="col-md-3">
-                    <a href="/comment/{{my_post.id}}"><button class="btn btn-info btn-sm">Comment</button></a>
+                    <a href="/comment/{{my_post.id}}"><button class="btn btn-info btn-sm m-2">Comment</button></a>
                 </div>
                 <div class="col-md-4">
-                    <a href="/like/{{my_post.id}}"><button class="btn btn-success btn-sm">Upvote {{my_post.up_vote.count()}}</button></a>
+                    <a href="/like/{{my_post.id}}"><button class="btn btn-success btn-sm m-2">Upvote {{my_post.up_vote.count()}}</button></a>
                 </div>
-                <div class="col-md-4">
-                    <a href="/dislike/{{my_post.id}}"><button class="btn btn-danger btn-sm">DownVote {{my_post.down_vote.count()}}</button></a>
+                <div class="col-md-5">
+                    <a href="/dislike/{{my_post.id}}"><button class="btn btn-danger btn-sm m-2">DownVote {{my_post.down_vote.count()}}</button></a>
                 </div>
             </div>
         </div>

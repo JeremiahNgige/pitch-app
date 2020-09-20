@@ -1,7 +1,7 @@
 from flask import render_template,request, redirect, url_for,abort
 from flask_login import login_required, current_user
 
-from .. import photos
+from .. import photos,db
 from . import main
 from .forms import PostForm, CommentForm, UpdateProfile
 from ..models import Post, Comment, User, Upvote, Downvote
@@ -76,7 +76,7 @@ def user():
 
 @main.route('/user/<name>/update_profile', methods=['POST', 'GET'])
 @login_required
-def update_profile(uname):
+def update_profile(name):
     form = UpdateProfile()
     user = User.query.filter_by(username=name).first()
     if user is None:
@@ -84,7 +84,7 @@ def update_profile(uname):
     if form.validate_on_submit():
         user.bio = form.bio.data
         user.save()
-        return redirect(url_for('.profile', uname=user.username))
+        return redirect(url_for('.user', name=user.username))
     return render_template('profile/update_profile.html', form=form)
 
 
@@ -114,4 +114,4 @@ def update_pic(name):
         path = f'photos/{filename}'
         user.profile_pic_path = path
         db.session.commit()
-    return redirect(url_for('main.profile',name=uname))
+    return redirect(url_for('main.user',name=name))
