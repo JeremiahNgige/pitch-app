@@ -20,7 +20,7 @@ class ProdConfig(Config):
     Args:
         Config: The general configuration class with the the general configuration settings
     '''
-    pass
+    SQLALCHEMY_DATABASE_URI =os.environ.get('DATABASE_URL')
 class DevConfig(Config):
     '''
     development configuration subclass
