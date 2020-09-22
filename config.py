@@ -11,7 +11,7 @@ class Config:
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     SQLALCHEMY_DATABASE_URI =os.environ.get('DATABASE_URL')
     SECRET_KEY = os.environ.get('SECRET_KEY')
-    SQLALCHEMY_DATABASE_URI ='postgresql+psycopg2://oem:Jeremih23@localhost/pitches'
+    SQLALCHEMY_DATABASE_URI =os.environ.get('DATABASE_URL')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     UPLOADED_PHOTOS_DEST ='app/static/photos'
 class ProdConfig(Config):
@@ -20,7 +20,7 @@ class ProdConfig(Config):
     Args:
         Config: The general configuration class with the the general configuration settings
     '''
-    SQLALCHEMY_DATABASE_URI =os.environ.get('DATABASE_URL')
+    pass
 class DevConfig(Config):
     '''
     development configuration subclass
