@@ -11,7 +11,7 @@ class Config:
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     SQLALCHEMY_DATABASE_URI =os.environ.get('DATABASE_URL')
     SECRET_KEY = os.environ.get('SECRET_KEY')
-    SQLALCHEMY_DATABASE_URI =os.environ.get('DATABASE_URL')
+    SQLALCHEMY_DATABASE_URI ='postgres+psycopg2://kmocrtyoqsvyvx:5bcedc5a205221386efa5cd29f4c605f19bb001e182c2dbadc217a096865e454@ec2-3-224-97-209.compute-1.amazonaws.com:5432/d816a7i050f40n'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     UPLOADED_PHOTOS_DEST ='app/static/photos'
 class ProdConfig(Config):
