@@ -22,7 +22,7 @@ class ProdConfig(Config):
         Config: The general configuration class with the the general configuration settings
     '''
     DATABASE_URL = os.environ['DATABASE_URL']
-    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+  
 class DevConfig(Config):
     '''
     development configuration subclass
