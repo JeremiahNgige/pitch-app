@@ -1,6 +1,6 @@
 virtual/
 *.pyc
-instance/
+/instance
 __pycache__
-.vscode
-*.sh
+/.vscode
+.sh
